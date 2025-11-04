@@ -1,0 +1,22 @@
+{
+  "name": "tech-news-aggregator",
+  "version": "1.0.0",
+  "description": "A modern tech news aggregator built with Vue 3 and Node.js",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm start",
+    "build:frontend": "cd frontend && npm run build"
+  },
+  "keywords": [
+    "news",
+    "aggregator",
+    "vue3",
+    "nodejs",
+    "tech-news"
+  ],
+  "author": "",
+  "license": "MIT"
+}
