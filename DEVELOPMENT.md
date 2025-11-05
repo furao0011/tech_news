@@ -32,14 +32,15 @@ backend/
 │           ├── hackerNews.js
 │           ├── github.js
 │           ├── devto.js
-│           └── reddit.js
+│           ├── reddit.js
+│           └── csdn.js      # 新增：CSDN 数据源
 
 frontend/
 ├── src/
 │   ├── main.js               # 应用入口
-│   ├── App.vue              # 根组件
+│   ├── App.vue              # 根组件：包含搜索和过滤逻辑
 │   ├── components/           # Vue 组件
-│   │   ├── Header.vue       # 头部组件：标题、刷新按钮
+│   │   ├── Header.vue       # 头部组件：标题、刷新、搜索、源选择
 │   │   ├── NewsList.vue     # 列表容器：负责布局
 │   │   └── NewsCard.vue     # 卡片组件：单条新闻展示
 │   ├── stores/               # Pinia 状态管理
@@ -59,7 +60,8 @@ aggregator.js (协调器)
     ├── hackerNews.js
     ├── github.js
     ├── devto.js
-    └── reddit.js
+    ├── reddit.js
+    └── csdn.js (新增)
     ↓
 聚合、排序、缓存
     ↓
@@ -70,15 +72,19 @@ aggregator.js (协调器)
 ```
 用户操作/页面加载
     ↓
-Vue 组件触发
+Vue 组件触发 (App.vue)
     ↓
-Pinia Store 调用
+    ├── 关键词搜索 → 过滤标题/描述/作者
+    ├── 源选择 → 过滤数据源
+    └── computed 计算过滤后的新闻
+    ↓
+Pinia Store 调用 (news.js)
     ↓
 HTTP 请求 → 后端 API
     ↓
 更新 Store 状态
     ↓
-组件响应式更新
+组件响应式更新 (NewsList → NewsCard)
 ```
 
 ## 数据标准化

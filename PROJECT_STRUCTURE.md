@@ -14,6 +14,7 @@ tech-news-aggregator/
 ├── 📄 CONTRIBUTING.md              # 贡献指南
 ├── 📄 CHANGELOG.md                 # 版本变更日志
 ├── 📄 PROJECT_STRUCTURE.md         # 本文档
+├── 📄 REQUIREMENTS_CLARIFICATION.md # 需求澄清文档 (新增)
 ├── 📄 LICENSE                      # MIT 许可证
 ├── 📄 package.json                 # 根项目配置
 ├── 🔧 start.sh                     # 启动脚本
@@ -52,7 +53,8 @@ tech-news-aggregator/
 │               ├── 📄 hackerNews.js    # Hacker News API
 │               ├── 📄 github.js        # GitHub Trending 爬虫
 │               ├── 📄 devto.js         # Dev.to API
-│               └── 📄 reddit.js        # Reddit API
+│               ├── 📄 reddit.js        # Reddit API
+│               └── 📄 csdn.js          # CSDN 爬虫 (新增)
 │
 └── 📁 frontend/                    # 前端应用 (Vue 3 + Vite)
     ├── 📄 package.json             # 前端依赖配置
@@ -70,6 +72,7 @@ tech-news-aggregator/
         ├── 📄 App.vue              # 根组件
         │                           # - 主布局
         │                           # - 主题配置
+        │                           # - 搜索和过滤逻辑 (新增)
         │
         ├── 📄 style.css            # 全局样式
         │                           # - 基础样式
@@ -79,6 +82,8 @@ tech-news-aggregator/
         │   ├── 📄 Header.vue       # 头部组件
         │   │                       # - 标题和介绍
         │   │                       # - 刷新按钮
+        │   │                       # - 搜索框 (新增)
+        │   │                       # - 数据源筛选器 (新增)
         │   │                       # - 数据源标签
         │   │
         │   ├── 📄 NewsList.vue     # 新闻列表容器

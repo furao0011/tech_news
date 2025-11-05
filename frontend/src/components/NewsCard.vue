@@ -73,6 +73,7 @@ const getSourceType = (source) => {
   if (source.includes('GitHub')) return 'success';
   if (source.includes('Dev.to')) return 'info';
   if (source.includes('Reddit')) return 'error';
+  if (source.includes('CSDN')) return 'primary';
   return 'default';
 };
 
@@ -98,13 +99,15 @@ const truncate = (text, length) => {
   height: 100%;
   transition: all 0.3s ease;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(24, 24, 28, 0.95);
   backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .news-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3);
+  border-color: rgba(99, 102, 241, 0.5);
 }
 
 .cover-image {
@@ -119,13 +122,13 @@ const truncate = (text, length) => {
 
 .time {
   font-size: 0.85rem;
-  color: #999;
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .news-title {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #333;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 10px;
   line-height: 1.4;
   display: -webkit-box;
@@ -136,7 +139,7 @@ const truncate = (text, length) => {
 
 .news-description {
   font-size: 0.9rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.75);
   line-height: 1.6;
   margin-bottom: 15px;
 }
@@ -146,7 +149,7 @@ const truncate = (text, length) => {
   flex-direction: column;
   gap: 10px;
   padding-top: 15px;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .tags {
