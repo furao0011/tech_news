@@ -2,6 +2,7 @@ import { fetchHackerNews } from './sources/hackerNews.js';
 import { fetchGitHubTrending } from './sources/github.js';
 import { fetchDevTo } from './sources/devto.js';
 import { fetchRedditProgramming } from './sources/reddit.js';
+import { fetchCSDN } from './sources/csdn.js';
 
 let newsCache = {
   items: [],
@@ -12,11 +13,12 @@ export const fetchAllNews = async () => {
   try {
     console.log('📡 Fetching news from all sources...');
     
-    const [hackerNews, githubTrending, devToNews, redditNews] = await Promise.allSettled([
+    const [hackerNews, githubTrending, devToNews, redditNews, csdnNews] = await Promise.allSettled([
       fetchHackerNews(),
       fetchGitHubTrending(),
       fetchDevTo(),
-      fetchRedditProgramming()
+      fetchRedditProgramming(),
+      fetchCSDN()
     ]);
 
     const allNews = [];
@@ -43,6 +45,12 @@ export const fetchAllNews = async () => {
       allNews.push(...redditNews.value);
     } else {
       console.error('❌ Reddit fetch failed:', redditNews.reason);
+    }
+
+    if (csdnNews.status === 'fulfilled') {
+      allNews.push(...csdnNews.value);
+    } else {
+      console.error('❌ CSDN fetch failed:', csdnNews.reason);
     }
 
     allNews.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));

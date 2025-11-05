@@ -31,6 +31,35 @@
       </div>
     </div>
     
+    <div class="filter-section">
+      <n-space vertical :size="15" style="width: 100%;">
+        <n-input
+          v-model:value="searchKeyword"
+          placeholder="🔍 搜索新闻标题或描述..."
+          size="large"
+          clearable
+          @input="handleSearch"
+        >
+          <template #prefix>
+            <span style="font-size: 1.2rem;">🔎</span>
+          </template>
+        </n-input>
+        
+        <div class="source-filter">
+          <span class="filter-label">数据源筛选：</span>
+          <n-space>
+            <n-checkbox-group v-model:value="selectedSources" @update:value="handleSourceChange">
+              <n-checkbox value="Hacker News" label="🔶 Hacker News" />
+              <n-checkbox value="GitHub Trending" label="⭐ GitHub" />
+              <n-checkbox value="Dev.to" label="📝 Dev.to" />
+              <n-checkbox value="Reddit" label="🤖 Reddit" />
+              <n-checkbox value="CSDN" label="💻 CSDN" />
+            </n-checkbox-group>
+          </n-space>
+        </div>
+      </n-space>
+    </div>
+    
     <div class="stats">
       <n-space>
         <n-tag type="success" round>
@@ -45,20 +74,35 @@
         <n-tag type="error" round>
           <span class="stat-icon">🤖</span> Reddit
         </n-tag>
+        <n-tag type="default" round>
+          <span class="stat-icon">💻</span> CSDN
+        </n-tag>
       </n-space>
     </div>
   </header>
 </template>
 
 <script setup>
-import { NButton, NSpace, NTag } from 'naive-ui';
+import { ref } from 'vue';
+import { NButton, NSpace, NTag, NInput, NCheckboxGroup, NCheckbox } from 'naive-ui';
 
 defineProps({
   loading: Boolean,
   lastUpdate: String
 });
 
-defineEmits(['refresh']);
+const emit = defineEmits(['refresh', 'search', 'source-change']);
+
+const searchKeyword = ref('');
+const selectedSources = ref(['Hacker News', 'GitHub Trending', 'Dev.to', 'Reddit', 'CSDN']);
+
+const handleSearch = () => {
+  emit('search', searchKeyword.value);
+};
+
+const handleSourceChange = () => {
+  emit('source-change', selectedSources.value);
+};
 
 const formatTime = (dateString) => {
   if (!dateString) return '';
@@ -75,12 +119,13 @@ const formatTime = (dateString) => {
 
 <style scoped>
 .header {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(24, 24, 28, 0.95);
   backdrop-filter: blur(10px);
   border-radius: 20px;
   padding: 30px;
   margin-bottom: 30px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .header-content {
@@ -100,7 +145,7 @@ const formatTime = (dateString) => {
 .title {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #333;
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 5px;
   display: flex;
   align-items: center;
@@ -123,7 +168,7 @@ const formatTime = (dateString) => {
 
 .subtitle {
   font-size: 1rem;
-  color: #666;
+  color: rgba(255, 255, 255, 0.75);
   margin-left: 55px;
 }
 
@@ -133,11 +178,30 @@ const formatTime = (dateString) => {
   gap: 15px;
 }
 
+.filter-section {
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.source-filter {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .stats {
   display: flex;
   justify-content: center;
   padding-top: 20px;
-  border-top: 1px solid #e0e0e0;
 }
 
 .stat-icon {
@@ -161,6 +225,11 @@ const formatTime = (dateString) => {
   
   .actions {
     width: 100%;
+  }
+  
+  .source-filter {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 </style>

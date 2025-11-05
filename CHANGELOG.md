@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2024-11-05
+
+### Added
+
+#### 新功能
+- 🔍 **关键词搜索功能**：用户可以在搜索框输入关键词，实时过滤新闻标题、描述和作者
+- 🎛️ **数据源选择器**：用户可以自主选择显示哪些数据源的内容，支持多选
+- 💻 **CSDN 数据源**：新增中文技术社区 CSDN 作为数据源，提供国内技术资讯
+
+#### 界面改进
+- 🎨 **深色主题优化**：修复了白色文字在浅色背景上显示不清的问题
+- 🎨 **现代化卡片设计**：使用深色半透明背景，提升视觉效果
+- 🎨 **Header 组件增强**：添加搜索框和数据源筛选组件
+- 🎨 **更好的对比度**：调整文字颜色以提供更好的可读性
+
+#### 技术改进
+- ⚡ **计算属性优化**：使用 Vue 3 computed 实现高效的过滤逻辑
+- ⚡ **响应式搜索**：实时搜索，无需点击搜索按钮
+- 🛡️ **CSDN 爬虫**：实现了稳定的 CSDN 首页热门文章抓取
+
+### Changed
+- 📱 移动端布局优化，数据源筛选在小屏幕上更易用
+- 🎨 统一深色主题配色方案
+- 📝 更新所有相关文档（README、DEVELOPMENT、CHANGELOG）
+
+### Fixed
+- 🐛 修复白色文字在浅色背景上不可见的问题
+- 🐛 修复卡片 hover 效果在深色主题下不明显的问题
+- 🎨 调整 border 和 shadow 颜色以适配深色主题
+
 ## [1.0.0] - 2024-11-04
 
 ### Added
@@ -102,20 +132,20 @@ tech-news-aggregator/
 - Reddit API 可能因 User-Agent 限制返回 403（已优化）
 - 数据当前存储在内存中，重启后丢失
 - 暂不支持用户认证和个性化
-- 没有内置搜索和过滤功能
+- CSDN 爬虫可能因网站结构变化需要调整
 
 ### Future Enhancements
 
 计划在未来版本中添加：
 
-#### v1.1.0 (计划中)
+#### v1.2.0 (计划中)
 - [ ] 数据持久化 (PostgreSQL/MongoDB)
 - [ ] 用户收藏功能
-- [ ] 新闻搜索和过滤
-- [ ] 更多数据源 (Product Hunt, Lobsters)
+- [ ] 更多中文数据源（掘金、思否、V2EX）
 - [ ] 单元测试和集成测试
+- [ ] 关键词订阅和通知
 
-#### v1.2.0 (计划中)
+#### v1.3.0 (计划中)
 - [ ] 用户账户系统
 - [ ] 个性化推荐
 - [ ] RSS 订阅功能
